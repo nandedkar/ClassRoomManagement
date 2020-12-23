@@ -1,0 +1,100 @@
+<div class="row">
+  <ul class="nav nav-tabs">
+    <li >
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+    </li>
+    <li >
+      <a routerLink="/student" routerLinkActive="active">Students</a>
+    </li>
+    <li class="active">
+      <a routerLink="/addmissionForm" routerLinkActive="active">AdmissionForm</a>
+    </li>
+  </ul>
+  <div class="row">
+    <div class="col-sm-10" class="formClass">
+      <div class="row">
+        <div class="col-sm-8">
+          <h2 style="text-align: center">Admission form</h2>
+          <br>
+          </div>
+      </div>
+      
+      <form class="form-horizontal" action="/action_page.php" (ngSubmit)='onSubmitAdmission()' #AdmissionForm="ngForm">
+        <div class="form-group" [class.has-error]='name.invalid && name.touched'>
+          <label class="control-label col-sm-2" for="name">Name:</label>
+          <div class="col-sm-6">
+            <input required type="text" class="form-control" id="name" placeholder="Enter Your Name" name="name" pattern="^[a-zA-Z ]*$"
+              [(ngModel)]='student.name' #name='ngModel' maxlength="20">
+            <div class="alert alert-danger " *ngIf="name.errors?.required && name.touched">
+              Name is Required
+            </div>
+            <div class="alert alert-danger " *ngIf="name.errors?.pattern && name.touched">
+              Number is not allowed please use only characters
+            </div>
+            <div class="alert alert-danger " *ngIf="name.errors?.maxlength && name.touched">
+              Max character size is 20
+            </div>
+
+          </div>
+        </div>
+        <div class="form-group" [class.has-error]='lastName.invalid && lastName.touched'>
+          <label class="control-label col-sm-2" for="lastName">Last Name:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" name="lastName" required maxlength="20"
+              pattern="^[a-zA-Z ]*$" [(ngModel)]='student.lastName' #lastName='ngModel'>
+            <div class="alert alert-danger " *ngIf="lastName.errors?.required && lastName.touched">
+              Last Name is Required
+            </div>
+            <div class="alert alert-danger " *ngIf="lastName.errors?.pattern && lastName.touched">
+              Number is not allowed please use only characters
+            </div>
+            <div class="alert alert-danger " *ngIf="lastName.errors?.maxlength && lastName.touched">
+              Max character size is 20
+            </div>
+          </div>
+        </div>
+        <div class="form-group" [class.has-error]='class.invalid && class.touched'>
+          <label class="control-label col-sm-2" for="class">Class:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="class" placeholder="Enter Your Class" name="class" required [(ngModel)]='student.class'
+              #class='ngModel'>
+            <div class="alert alert-danger " *ngIf="class.errors?.required && class.touched">
+              class is Required
+            </div>
+          </div>
+        </div>
+        <div class="form-group" [class.has-error]='year.invalid && year.touched'>
+          <label class="control-label col-sm-2" for="year">Year:</label>
+          <div class="col-sm-6">
+            <input type="number" pattern="^$|^([0-9]|[0-9][0-9][0-1][0-7]|[2][0][1][7])?" [max]="2017" class="form-control" id="year"
+              placeholder="Enter The Year" name="year" required [(ngModel)]='student.year' #year='ngModel'>
+            <div class="alert alert-danger " *ngIf="year.errors?.required && year.touched">
+              Year is Required
+            </div>
+            <div class="alert alert-danger " *ngIf="year.errors?.pattern && year.touched">
+              Year more than 2017 is not allowed
+            </div>
+          </div>
+        </div>
+        <div class="form-group" [class.has-error]='persentage.invalid && persentage.touched'>
+          <label class="control-label col-sm-2" for="persentage">Persentage:</label>
+          <div class="col-sm-6">
+            <input type="text" pattern="^[0-9]*$" class="form-control" id="persentage" placeholder="Enter Your Persentager" name="persentage"
+              required [(ngModel)]='student.persentage' #persentage='ngModel'>
+            <div class="alert alert-danger " *ngIf="persentage.errors?.required && persentage.touched">
+              Persentage is Required
+            </div>
+            <div class="alert alert-danger " *ngIf="persentage.errors?.pattern && persentage.touched">
+              characters is not allowed please use only numbers
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" [disabled]="!AdmissionForm.form.valid">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

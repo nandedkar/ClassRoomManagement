@@ -1,0 +1,47 @@
+<div class="container">
+  <ul class="nav nav-tabs">
+
+    <li>
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+    </li>
+    <li class="active">
+      <a routerLink="/student" routerLinkActive="active">Students</a>
+    </li>
+    <li>
+      <a routerLink="/addmissionForm" routerLinkActive="active">AdmissionForm</a>
+    </li>
+  </ul>
+</div>
+<div class="row" style="margin: 50px">
+  <table>
+    <tr>
+      <th colspan="4"> Student Result Board</th>
+    </tr>
+    <tr>
+      <th>
+        <em>Student Name</em>
+      </th>
+      <th>
+        <em>Roll Number</em>
+      </th>
+      <th>
+        <em>Total Marks</em>
+      </th>
+      <th>
+        <em>Status</em>
+      </th>
+    </tr>
+    <tr *ngFor="let student of students " [style.color]="student.color">
+      <td>{{student.name | titlecase }}</td>
+      <td>{{student.rollNumber}}</td>
+      <td>{{student.total}}</td>
+      <td>{{student.status}}</td>
+    </tr>
+    <tr *ngIf='!students'>
+      <td colspan="4">{{statusMessage}}</td>
+    </tr>
+    <tr *ngIf='students && students.length==0'>
+      <td colspan="4">No data to display</td>
+    </tr>
+  </table>
+</div>
